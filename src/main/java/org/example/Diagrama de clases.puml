@@ -1,11 +1,29 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/class-diagram
 
-autonumber
+class Alumno {
+  - String nombre
+  - List<Materia> materiasAprobadas
+  + void aprobarMateria(materia: Materia)
+  + boolean tieneAprobada(materia: Materia)
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+class Materia {
+  - String nombre
+  - List<Materia> correlativas
+  + void agregarCorrelativa(materia: Materia)
+  + boolean puedeCursar(alumno: Alumno)
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+class Inscripcion {
+  - Alumno alumno
+  - List<Materia> materias
+  + boolean aprobada()
+}
+
+"Alumno" <-- "Inscripcion"
+"Inscripcion" --> "Materia"
+"Materia" --> "Materia"
+"Alumno" --> "Materia"
+
 @enduml
